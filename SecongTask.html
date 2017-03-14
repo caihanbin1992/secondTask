@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>secondTask</title>
+</head>
+<body>
+<h3>污染城市列表</h3>
+<ul id="aqi-list">
+    <!--
+        <li>第一名：福州（样例），10</li>
+         <li>第二名：福州（样例），10</li> -->
+</ul>
+<script>
+    var aqiData = [
+        ["北京", 90],
+        ["上海", 50],
+        ["福州", 10],
+        ["广州", 50],
+        ["成都", 90],
+        ["西安", 100]
+    ];
+    //筛选
+    function checkAirQuality(data) {
+       var first=new Array();
+       for(var i=0;i<data.length;i++){
+           if(data[i][1]<60){
+               first.push(data[i]);
+           }
+       }
+      // console.log(first);
+        return first;
+    }
+    //冒泡排序
+    function sortArray(data) {
+        for(var i=0;i<data.length-1;i++){
+            for(var j=0;j<data.length-1-i;j++)
+                if(data[j][1]>data[j+1][1]){
+                    var temp=data[j][1];
+                    data[j][1]=data[j+1][1];
+                    data[j+1][1]=temp;
+            }
+        }
+        return data;
+    }
+    //添加li标签
+    function addLi() {
+        var data1= checkAirQuality(aqiData);
+        var daraSort= sortArray(data1);
+        var list=document.getElementById("aqi-list");
+        for(var i=0;i<daraSort.length;i++){
+            list.innerHTML+="<li>"+"第"+(i+1)+"名:"+daraSort[i][0]+","+daraSort[i][1]+"</li>"
+        }
+    }
+  addLi();
+</script>
+</body>
+</html>
